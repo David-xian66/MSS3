@@ -1,0 +1,93 @@
+.main{
+    margin-top: 0;
+    margin-bottom: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+.things{
+    height: 100%;
+    width: 100%;
+}
+.panel{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.panel_left{
+    border: 3px solid rgba(255, 255, 255, 10%);
+    border-radius: 80px 0 0 80px;
+    backdrop-filter: blur(20px);
+}
+.panel_left{
+    padding-top: 50px;
+    padding-left: 30px;
+}
+.panel_right{
+    padding-top: 80px;
+    padding-left: 30px;
+}
+.Des{
+    margin-top: 40px;
+    color: rgba(0, 186, 173, 1);
+    font-size: 35px;
+}
+.BottomImg{
+    margin-top: 50px;
+    margin-left: -20px;
+    width: 110%;
+}
+.panel_right{
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 0 80px 80px 0;
+    z-index: 1;
+}
+.a-Title{
+    margin-left: -30px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, .5);
+    color: rgba(56, 56, 56, 1);
+    text-align: center;
+    margin-bottom: 70px;
+}
+.input{
+    padding-top: 15px;
+    padding-left: 5px;
+    padding-bottom: 30px;
+}
+.Login{
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+.Login-btn{
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+}
+.bq{
+    color: rgba(0, 0, 0, 0.19);
+    padding-top: 40px;
+}
+
+
+@media all and (max-width: 991px){
+    .panel{
+        margin-left: 15%;
+        max-width: 70%;
+        flex-basis: 70%;
+    }
+}
+@media all and (max-width: 710px) {
+    .panel_right{
+        border-radius: 80px 80px 80px 80px;
+        margin-left: -15%;
+        max-width: 130%;
+        flex-basis: 130%;
+    }
+    .panel_left{
+        display: none;
+    }
+}
