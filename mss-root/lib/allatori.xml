@@ -1,7 +1,7 @@
 <config>
     <input>
         <!-- in表示输出的原始jar包，out表示输出的混淆后的jar包，后者名称可自定义，也可以是war -->
-        <jar in="mss-root-0.0.1-SNAPSHOT.jar" out="MSS3-0.0.2.jar"/>
+        <jar in="mss-root-0.0.1-SNAPSHOT.jar" out="MSS3-0.0.3.jar"/>
     </input>
     <keep-names>
         <class access="protected+">
@@ -28,6 +28,7 @@
         <class template="class com.company.business.*.manager.*" />
         <class template="class com.company.business.*.model.*" />
         <class template="class com.company.business.*.controller.*" />
+        <class template="class org.springframework.boot.web.server.ErrorPageRegistrar"/>
     </ignore-classes>
 
     <!-- 到期时间(到期后无法启动jar) 格式：yyyy/mm/dd-->

@@ -1,10 +1,35 @@
 <template>
-<h1>这里是主页！目前还没有做登录验证，所以要手动打开login啦！地址是/#/login，默认用户名密码：Master | 1234567890</h1>
+<h1>这里是就是主页啦！</h1>
 </template>
 
 <script>
+import {getCookie} from "@/assets/js/cookie";
+import axios from "axios";
+
 export default {
-  name: "HomePage"
+  name: "HomePage",
+  mounted() {
+    this.isLogin();
+  },
+  methods:{
+    isLogin(){
+      let userinfo = getCookie("Token");
+      if(userinfo.length === 0){
+        this.$router.push({path : "#/login"});
+      }
+      axios
+          .get('/api-login/isLive',{
+            headers:{
+              'Token' : userinfo,
+            },
+          })
+          .then(response => {
+            if(response.data.code.startsWith("-5")){
+              this.$router.push({path : "/login"});
+            }
+          });
+    }
+  }
 }
 </script>
 

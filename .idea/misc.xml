@@ -4,6 +4,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/mss-root/pom.xml" />
+        <option value="$PROJECT_DIR$/mss-root/mss-apidoc/pom.xml" />
+        <option value="$PROJECT_DIR$/mss-apidoc/pom.xml" />
       </list>
     </option>
   </component>
