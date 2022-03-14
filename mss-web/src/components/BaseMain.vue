@@ -1,0 +1,146 @@
+<template>
+  <div>
+    <img :src="backGroundImg" class="background" alt=""/>
+    <el-container class="main">
+      <el-aside width="auto" class="aside">
+        <a href="https://mss3.top">
+          <img :src="Logo" class="logo" v-show="!isHideLogo" alt="">
+        </a>
+        <el-menu
+            :default-active="index"
+            class="menu"
+            :collapse="isHideMenu"
+        >
+          <el-menu-item index="1">
+            <el-icon><data-analysis /></el-icon>
+            <template #title>概览</template>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
+      <el-container>
+        <el-header class="header">
+          <el-row>
+            <el-col :span="1">
+              <el-icon v-on:click="hideMenu" :size="20" color="#FFFFFF">
+                <fold />
+              </el-icon>
+            </el-col>
+            <el-col :span="6">
+              <h3 class="date header_text">{{ date }}</h3>
+            </el-col>
+            <el-col :offset="8" :span="2">
+              <el-link href="https://release.mss3.top" class="header_text" :underline="false" :icon="Bottom">版本列表</el-link>
+            </el-col>
+            <el-col :span="3">
+              <el-link href="/swagger-ui/index.html" class="header_text" :underline="false" :icon="Collection">开放文档(本地)</el-link>
+            </el-col>
+            <el-col :span="2">
+              <el-link href="https://www.yuque.com/xiaoyi311-m10j2/mss3/dfrg06" class="header_text" :underline="false" :icon="Search">帮助文档</el-link>
+            </el-col>
+            <el-col :span="2">
+              <el-link href="/api-login/loginOut" class="header_text" :underline="false" :icon="Close">登出</el-link>
+            </el-col>
+          </el-row>
+        </el-header>
+        <el-main class="webMain">
+          <div class="webMain_Title">
+            <span class="Title">{{ title }}</span>
+          </div>
+          <div class="webBody">
+            <slot></slot>
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+</template>
+
+<!--suppress HtmlUnknownTarget -->
+<style :src="baseMainCss"/>
+
+<script setup>
+import { Bottom, Collection, Search, Close } from "@element-plus/icons-vue";
+</script>
+
+<script>
+import {getCookie} from "@/assets/js/cookie";
+import axios from "axios";
+import {Fold, DataAnalysis} from "@element-plus/icons-vue";
+
+export default {
+  name: "BaseMain",
+  components: {
+    Fold,
+    DataAnalysis
+  },
+  props: ['title', 'index'],
+  data(){
+    return{
+      baseMainCss:require('../assets/css/BaseMain.css'),
+      backGroundImg:require('../assets/images/home_background.png'),
+      Logo:require('../assets/images/logo.png'),
+      isHideMenu:false,
+      isHideLogo:false,
+      hideTimer:null,
+      date:"",
+    }
+  },
+  mounted() {
+    this.isLogin();
+    this.getTime();
+    this.timer = setInterval(() => {
+      this.getTime();
+    }, 3000)
+  },
+  methods:{
+    isLogin(){
+      let userinfo = getCookie("Token");
+      if(userinfo.length === 0){
+        this.$router.push({path : "#/login"});
+      }
+      axios
+          .get('/api-login/isLive',{
+            headers:{
+              'Token' : userinfo,
+            },
+          })
+          .then(response => {
+            if(response.data.code === -5){
+              this.$router.push({path : "/login"});
+            }
+          });
+    },
+    hideMenu(){
+      if(this.isHideMenu){
+        this.isHideMenu = !this.isHideMenu;
+        clearTimeout(this.hideTimer);
+        this.hideTimer = setTimeout(() => {
+          console.log("1")
+          this.isHideLogo = false;
+        }, 300);
+      }else {
+        this.isHideMenu = !this.isHideMenu;
+        this.isHideLogo = true;
+      }
+    },
+    getTime() {
+      let weeks = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+      let time = new Date();
+      let year = time.getFullYear();
+      let month = time.getMonth() + 1;
+      let day = time.getDate();
+      let week = weeks[time.getDay()];
+      let hour = time.getHours();
+      let minutes = time.getMinutes();
+      if(minutes<10){
+        minutes='0'+minutes
+      }
+      this.date = year + '/' + month + '/' + day + " " + week + " " + hour + ":" + minutes;
+    },
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

@@ -1,34 +1,24 @@
 <template>
-<h1>这里是就是主页啦！</h1>
+  <base-main title="概览" index="1">
+    <el-row class="myCard">
+      <el-col :span="24">
+        <el-card body-style="padding: 10px; padding-left: 20px" shadow="hover">
+          <b>温馨提示：</b>
+          主页还没有做好哦，这个页面是用来测试的。没啥别的用处
+        </el-card>
+      </el-col>
+    </el-row>
+  </base-main>
 </template>
 
 <script>
-import {getCookie} from "@/assets/js/cookie";
-import axios from "axios";
+
+import BaseMain from "@/components/BaseMain";
 
 export default {
   name: "HomePage",
-  mounted() {
-    this.isLogin();
-  },
-  methods:{
-    isLogin(){
-      let userinfo = getCookie("Token");
-      if(userinfo.length === 0){
-        this.$router.push({path : "#/login"});
-      }
-      axios
-          .get('/api-login/isLive',{
-            headers:{
-              'Token' : userinfo,
-            },
-          })
-          .then(response => {
-            if(response.data.code.startsWith("-5")){
-              this.$router.push({path : "/login"});
-            }
-          });
-    }
+  components :{
+    BaseMain
   }
 }
 </script>

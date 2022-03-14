@@ -9,6 +9,7 @@ import top.mss3.mssroot.model.TokenResult;
 import top.mss3.mssroot.model.User;
 import top.mss3.mssroot.utils.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -59,13 +60,13 @@ public class LoginController {
                 if(user.equals(loginUser)){
                     MyLog.info("用户：" + loginUser.getUserName() + "登录成功");
                     MyCookie.setCookie(response, "Token", MyToken.getToken(loginUser), 5 * 24 * 60 * 60);
-                    return new BaseResult(1, "登录成功", "");
+                    return new BaseResult<>(1, "登录成功", "");
                 }
             }
-            return new BaseResult(0, "用户名或密码错误", "");
+            return new BaseResult<>(0, "用户名或密码错误", "");
         }catch (Exception e) {
             MyLog.error("API：UserLogin 出现错误！" + e.getMessage());
-            return new BaseResult(-1, e.getMessage(), "");
+            return new BaseResult<>(-1, e.getMessage(), "");
         }
     }
 
@@ -87,9 +88,26 @@ public class LoginController {
     public BaseResult isLive(HttpServletRequest request) {
         TokenResult tokenResult = MyToken.isToken(request);
         if(tokenResult == TokenResult.SUCCESS_TOKEN){
-            return new BaseResult(1, "Token 正确", "");
+            return new BaseResult<>(1, "Token 正确", "");
         }else {
-            return new BaseResult(1, "Token 正确", "");
+            return new BaseResult<>(-5, "Token 错误", "");
         }
+    }
+
+    @ApiOperation(value = "退出登录", notes = "清除Token并且重定向到登录页面")
+    @GetMapping("/loginOut")
+    public BaseResult logOut(HttpServletRequest request, HttpServletResponse response){
+        Cookie userToken = MyCookie.getCookie(request, "Token");
+        if(userToken == null){
+            return new BaseResult<>(0, "你并没有登录", "");
+        }
+        MyCookie.setCookie(response, "Token", null, 0);
+        try{
+            response.sendRedirect("../");
+        }catch (Exception e){
+            MyLog.error(e.getMessage());
+            return new BaseResult<>(-1, "重定向失败，但已经退出登录，请手动关闭此页面", "");
+        }
+        return new BaseResult<>(1, "已退出登录", "");
     }
 }

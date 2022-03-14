@@ -76,7 +76,7 @@ console.log(
     "———————————————————————————————————————————\n"+
     "            MSS3 DEBUG CONSOLE             \n"+
     "  Minecraft Server Start 3 By XiaoyiStudio \n"+
-    "                v0.0.3-dev                 \n"+
+    "                v0.0.4-dev                 \n"+
     "———————————————————————————————————————————\n"+
     "                                           \n",
     "color:green"
@@ -107,11 +107,11 @@ export default {
           .get('/api-login/userLogin?UserName=' + this.userInfo.userName + "&PassWord=" + hex_md5(this.userInfo.passWord))
           .then(response => {
             this.loading = false;
-            if(response.data.code.startsWith("0")){
+            if(response.data.code === 0){
               this.errorMsg = response.data.msg;
-            }else if(response.data.code.startsWith("-1")){
+            }else if(response.data.code === -1){
               this.errorMsg = response.data.msg;
-            }else if(response.data.code.startsWith("1")){
+            }else if(response.data.code === 1){
               this.$router.push({path : "/"});
             }
           });
