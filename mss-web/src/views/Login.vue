@@ -76,7 +76,7 @@ console.log(
     "———————————————————————————————————————————\n"+
     "            MSS3 DEBUG CONSOLE             \n"+
     "  Minecraft Server Start 3 By XiaoyiStudio \n"+
-    "                v0.0.5-dev                 \n"+
+    "                v0.0.6-dev                 \n"+
     "———————————————————————————————————————————\n"+
     "                                           \n",
     "color:green"
@@ -112,7 +112,7 @@ export default {
             }else if(response.data.code === -1){
               this.errorMsg = response.data.msg;
             }else if(response.data.code === 1){
-              this.$router.push({path : "/"});
+              window.location.href="#/"
             }
           });
     }

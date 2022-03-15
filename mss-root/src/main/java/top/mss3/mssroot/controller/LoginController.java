@@ -46,13 +46,11 @@ public class LoginController {
             HttpServletResponse response){
         User loginUser = new User(UserName, PassWord);
         BaseResult result = MyUser.isUserLogin(loginUser);
-        switch (result.getCode()){
-            case 1 -> {
-                MyLog.info("用户：" + UserName + "登录成功");
-                MyCookie.setCookie(response, "Token", MyToken.getToken(loginUser), 5 * 24 * 60 * 60);
-            }
-
-            case -1 -> MyLog.error("API：UserLogin 出现错误！" + result.getMsg());
+        if(result.getCode() == 1){
+            MyLog.info("用户：" + UserName + "登录成功");
+            MyCookie.setCookie(response, "Token", MyToken.getToken(loginUser), 5 * 24 * 60 * 60);
+        }else if(result.getCode() == -1){
+            MyLog.error("API：UserLogin 出现错误！" + result.getMsg());
         }
         return result;
     }

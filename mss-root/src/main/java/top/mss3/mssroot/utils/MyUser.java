@@ -13,6 +13,16 @@ public class MyUser {
      * 获取所有用户
      */
     public static List<User> GetUsers(){
+        if(!MyData.IsJsonData("Users")){
+            JSONObject users = new JSONObject();
+            JSONObject master = new JSONObject();
+            JSONArray Users = new JSONArray();
+            master.put("UserName", "Master");
+            master.put("PassWord", "e807f1fcf82d132f9bb018ca6738a19f");
+            Users.add(master);
+            users.put("Users", Users);
+            MyData.SetJsonData(users, "MSSUsers");
+        }
         List<User> result = new ArrayList<>();
         for (Object dataUserObj : JSONArray.parseArray(MyData.GetJsonData("MSSUsers").get("Users").toString()))
             result.add(((JSONObject) dataUserObj).toJavaObject(User.class));
@@ -38,16 +48,6 @@ public class MyUser {
      */
     public static BaseResult isUserLogin(User loginUser) {
         try{
-            if(!MyData.IsJsonData("Users")){
-                JSONObject users = new JSONObject();
-                JSONObject master = new JSONObject();
-                JSONArray Users = new JSONArray();
-                master.put("UserName", "Master");
-                master.put("PassWord", "e807f1fcf82d132f9bb018ca6738a19f");
-                Users.add(master);
-                users.put("Users", Users);
-                MyData.SetJsonData(users, "MSSUsers");
-            }
             for (User user : MyUser.GetUsers()){
                 if(user.equals(loginUser)){
                     return new BaseResult<>(1, "登录成功", "");

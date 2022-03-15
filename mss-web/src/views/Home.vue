@@ -3,18 +3,19 @@
     <div>
       <el-row class="myCard">
         <el-col :span="15">
-          <el-card body-style="padding: 10px; padding-left: 10px" shadow="hover">
+          <el-card class="card" body-style="padding: 10px; padding-left: 10px" shadow="hover">
             <h1 class="card_title">玩家列表</h1>
             <el-divider/>
             <el-table :data="tableData" height="250" style="width: 100%">
-              <el-table-column prop="name" label="名称" width="180" />
-              <el-table-column prop="uuid" label="UUID" width="180" />
-              <el-table-column prop="joinTime" label="入服时间" />
+              <el-table-column prop="name" label="名称" width="100" />
+              <el-table-column prop="uuid" label="UUID" width="200" />
+              <el-table-column prop="joinTime" label="入服时间" width="100" />
+              <el-table-column prop="type" label="权限" />
             </el-table>
           </el-card>
         </el-col>
         <el-col :offset="1" :span="8">
-          <el-card body-style="padding: 10px; padding-left: 10px" shadow="hover">
+          <el-card class="card" body-style="padding: 10px; padding-left: 10px" shadow="hover">
             <h1 class="card_title">CPU及内存信息</h1>
             <el-divider/>
             <div id="cpu_info" class="cpu_info"></div>
@@ -23,7 +24,7 @@
       </el-row>
       <el-row class="myCard">
         <el-col :span="24">
-          <el-card body-style="padding: 10px; padding-left: 10px" shadow="hover">
+          <el-card class="card" body-style="padding: 10px; padding-left: 10px" shadow="hover">
             <h1 class="card_title">其他信息</h1>
             <el-divider/>
             <div id="other_info" class="other_info"></div>
@@ -54,31 +55,37 @@ export default {
           name: 'Xiaoyi311',
           uuid: 'xxxx-xxxx-xxxx-xxxx',
           joinTime: '2222-2-22',
+          type: 'admin',
         },
         {
           name: 'Xiaoyi311',
           uuid: 'xxxx-xxxx-xxxx-xxxx',
           joinTime: '2222-2-22',
+          type: 'admin',
         },
         {
           name: 'Xiaoyi311',
           uuid: 'xxxx-xxxx-xxxx-xxxx',
           joinTime: '2222-2-22',
+          type: 'admin',
         },
         {
           name: 'Xiaoyi311',
           uuid: 'xxxx-xxxx-xxxx-xxxx',
           joinTime: '2222-2-22',
+          type: 'admin',
         },
         {
           name: 'Xiaoyi311',
           uuid: 'xxxx-xxxx-xxxx-xxxx',
           joinTime: '2222-2-22',
+          type: 'admin',
         },
         {
           name: 'Xiaoyi311',
           uuid: 'xxxx-xxxx-xxxx-xxxx',
           joinTime: '2222-2-22',
+          type: 'admin',
         }
       ],
       cpuInfo:null,

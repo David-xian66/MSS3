@@ -19,7 +19,8 @@ public class User {
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof User other){
+        if(obj instanceof User){
+            User other = (User) obj;
             return other.getUserName().equals(this.UserName)
                    &&
                    other.getPassword().equals(this.Password);

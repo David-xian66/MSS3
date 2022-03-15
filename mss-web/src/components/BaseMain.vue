@@ -2,7 +2,7 @@
   <div>
     <img :src="backGroundImg" class="background" alt=""/>
     <el-container class="main">
-      <el-aside width="auto" class="aside">
+      <el-aside width="auto" class="aside card">
         <a href="https://mss3.top">
           <img :src="Logo" class="logo" v-show="!isHideLogo" alt="">
         </a>
@@ -10,11 +10,34 @@
             :default-active="index"
             class="menu"
             :collapse="isHideMenu"
+            @select="menuSelect"
         >
           <el-menu-item index="1">
             <el-icon><data-analysis /></el-icon>
-            <template #title>概览</template>
+            <span>概览</span>
           </el-menu-item>
+          <el-sub-menu index="2" title="服务端管理">
+            <template #title>
+              <el-icon><Grid/></el-icon>
+              <span>服务端</span>
+            </template>
+            <el-menu-item index="2-1">
+              <el-icon><Collection/></el-icon>
+              <span>服务端管理</span>
+            </el-menu-item>
+            <el-menu-item index="2-2">
+              <el-icon><Document/></el-icon>
+              <span>服务端设置</span>
+            </el-menu-item>
+            <el-menu-item index="2-3">
+              <el-icon><Cloudy/></el-icon>
+              <span>服务端导入</span>
+            </el-menu-item>
+            <el-menu-item index="2-4">
+              <el-icon><Bottom/></el-icon>
+              <span>服务端下载</span>
+            </el-menu-item>
+          </el-sub-menu>
         </el-menu>
       </el-aside>
       <el-container>
@@ -44,7 +67,7 @@
           </el-row>
         </el-header>
         <el-main class="webMain">
-          <el-row class="webMain_Title">
+          <el-row class="card webMain_Title">
             <span class="Title">{{ title }}</span>
           </el-row>
           <div class="webBody">
@@ -62,7 +85,7 @@
 <style :src="baseMainCss"/>
 
 <script setup>
-import { Bottom, Collection, Search, Close } from "@element-plus/icons-vue";
+import { Bottom, Collection, Search, Close, Grid, Cloudy, Document } from "@element-plus/icons-vue";
 </script>
 
 <script>
@@ -98,8 +121,9 @@ export default {
   methods:{
     isLogin(){
       let userinfo = getCookie("Token");
+      alert(userinfo.length)
       if(userinfo.length === 0){
-        this.$router.push({path : "#/login"});
+        window.location.href="#/login"
       }
       axios
           .get('/api-login/isLive',{
@@ -109,7 +133,7 @@ export default {
           })
           .then(response => {
             if(response.data.code === -5){
-              this.$router.push({path : "/login"});
+              window.location.href="#/login"
             }
           });
     },
@@ -140,6 +164,16 @@ export default {
       }
       this.date = year + '/' + month + '/' + day + " " + week + " " + hour + ":" + minutes;
     },
+    menuSelect(index){
+      switch (index) {
+        case "1":
+          window.location.href="#/"
+          break;
+        case "2-1":
+          window.location.href="#/serverManager"
+          break;
+      }
+    }
   }
 }
 </script>
