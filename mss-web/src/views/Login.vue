@@ -76,7 +76,7 @@ console.log(
     "———————————————————————————————————————————\n"+
     "            MSS3 DEBUG CONSOLE             \n"+
     "  Minecraft Server Start 3 By XiaoyiStudio \n"+
-    "                v0.0.4-dev                 \n"+
+    "                v0.0.5-dev                 \n"+
     "———————————————————————————————————————————\n"+
     "                                           \n",
     "color:green"

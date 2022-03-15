@@ -22,7 +22,8 @@
           <el-row>
             <el-col :span="1">
               <el-icon v-on:click="hideMenu" :size="20" color="#FFFFFF">
-                <fold />
+                <fold v-show="!isHideMenu" />
+                <expand v-show="isHideMenu"/>
               </el-icon>
             </el-col>
             <el-col :span="6">
@@ -43,11 +44,13 @@
           </el-row>
         </el-header>
         <el-main class="webMain">
-          <div class="webMain_Title">
+          <el-row class="webMain_Title">
             <span class="Title">{{ title }}</span>
-          </div>
+          </el-row>
           <div class="webBody">
-            <slot></slot>
+            <transition name="slide-fade" appear>
+              <slot></slot>
+            </transition>
           </div>
         </el-main>
       </el-container>
@@ -65,7 +68,7 @@ import { Bottom, Collection, Search, Close } from "@element-plus/icons-vue";
 <script>
 import {getCookie} from "@/assets/js/cookie";
 import axios from "axios";
-import {Fold, DataAnalysis} from "@element-plus/icons-vue";
+import {Fold, DataAnalysis, Expand} from "@element-plus/icons-vue";
 
 export default {
   name: "BaseMain",

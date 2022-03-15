@@ -45,29 +45,16 @@ public class LoginController {
             @RequestParam(name = "PassWord") String PassWord,
             HttpServletResponse response){
         User loginUser = new User(UserName, PassWord);
-        try{
-            if(!MyData.IsJsonData("Users")){
-                JSONObject users = new JSONObject();
-                JSONObject master = new JSONObject();
-                JSONArray Users = new JSONArray();
-                master.put("UserName", "Master");
-                master.put("PassWord", "e807f1fcf82d132f9bb018ca6738a19f");
-                Users.add(master);
-                users.put("Users", Users);
-                MyData.SetJsonData(users, "MSSUsers");
+        BaseResult result = MyUser.isUserLogin(loginUser);
+        switch (result.getCode()){
+            case 1 -> {
+                MyLog.info("用户：" + UserName + "登录成功");
+                MyCookie.setCookie(response, "Token", MyToken.getToken(loginUser), 5 * 24 * 60 * 60);
             }
-            for (User user : MyUser.GetUsers()){
-                if(user.equals(loginUser)){
-                    MyLog.info("用户：" + loginUser.getUserName() + "登录成功");
-                    MyCookie.setCookie(response, "Token", MyToken.getToken(loginUser), 5 * 24 * 60 * 60);
-                    return new BaseResult<>(1, "登录成功", "");
-                }
-            }
-            return new BaseResult<>(0, "用户名或密码错误", "");
-        }catch (Exception e) {
-            MyLog.error("API：UserLogin 出现错误！" + e.getMessage());
-            return new BaseResult<>(-1, e.getMessage(), "");
+
+            case -1 -> MyLog.error("API：UserLogin 出现错误！" + result.getMsg());
         }
+        return result;
     }
 
     /**
@@ -94,6 +81,9 @@ public class LoginController {
         }
     }
 
+    /**
+     * 退出登录
+     */
     @ApiOperation(value = "退出登录", notes = "清除Token并且重定向到登录页面")
     @GetMapping("/loginOut")
     public BaseResult logOut(HttpServletRequest request, HttpServletResponse response){

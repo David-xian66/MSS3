@@ -46,7 +46,7 @@
 .webMain_Title{
     background-color: white;
     width: auto;
-    height: 40px;
+    height: 60px;
     padding-top: 15px;
     padding-left: 30px;
     z-index: 5;
@@ -54,6 +54,13 @@
 .Title{
     font-size: 20px;
     color: rgb(87, 89, 98);
+}
+.title_menu{
+    margin-left: 30px;
+    margin-top: 7px;
+}
+.card_title{
+    margin-top: 0;
 }
 .webBody{
     margin-top: 20px;
@@ -65,4 +72,14 @@
 }
 .myCard{
     margin-bottom: 20px;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.6s ease-out;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateY(100px);
+    opacity: 0;
 }
