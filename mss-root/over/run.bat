@@ -1,3 +1,3 @@
 @ECHO OFF
-java -Dloader.path=lib -jar MSS3-0.0.5.jar
+java -Dloader.path=lib -jar MSS3-x.x.x.jar
 pause
