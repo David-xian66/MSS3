@@ -40,11 +40,6 @@
             <artifactId>java-jwt</artifactId>
             <version>3.18.3</version>
         </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>3.0.0</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -65,7 +60,7 @@
                 <configuration>
                     <injar>${project.build.finalName}.jar</injar>
                     <!--输出的jar-->
-                    <outjar>MSS3-0.0.6.jar</outjar>
+                    <outjar>MSS3-0.0.7.jar</outjar>
                     <!-- 是否混淆-->
                     <obfuscate>true</obfuscate>
                     <options>
@@ -102,7 +97,6 @@
                         <option>-keep class top.mss3.mssroot.MssRootApplication</option>
                         <option>-keep class top.mss3.mssroot.controller.* {*;}</option>
                         <option>-keep class top.mss3.mssroot.model.* {*;}</option>
-                        <option>-keep class top.mss3.mssroot.ApiConfig</option>
                         <!--  ##### 以上为需要根据项目情况修改 ##### -->
 
                         <option>-keep interface * extends * { *; }</option>

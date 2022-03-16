@@ -1,8 +1,5 @@
 package top.mss3.mssroot.controller;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
-import io.swagger.annotations.*;
 import org.springframework.web.bind.annotation.*;
 import top.mss3.mssroot.model.BaseResult;
 import top.mss3.mssroot.model.TokenResult;
@@ -13,32 +10,12 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Api(tags = "登录类")
 @RestController
 @RequestMapping("/api-login")
 public class LoginController {
     /**
      * 用户登录
      */
-    @ApiOperation(value = "用户登录", notes = "管理用户登录以及Token")
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "UserName",
-                    value = "用户名",
-                    required = true,
-                    paramType = "query",
-                    dataType = "string",
-                    dataTypeClass = String.class
-            ),
-            @ApiImplicitParam(
-                    name = "PassWord",
-                    value = "密码",
-                    required = true,
-                    paramType = "query",
-                    dataType = "string",
-                    dataTypeClass = String.class
-            )
-    })
     @GetMapping("/userLogin")
     public BaseResult UserLogin(
             @RequestParam(name = "UserName") String UserName,
@@ -58,17 +35,6 @@ public class LoginController {
     /**
      * 检测Token是否存在
      */
-    @ApiOperation(value = "Token校验", notes = "验证Token是否存在")
-    @ApiImplicitParams({
-            @ApiImplicitParam(
-                    name = "Token",
-                    value = "Token",
-                    required = true,
-                    paramType = "header",
-                    dataType = "string",
-                    dataTypeClass = String.class
-            ),
-    })
     @GetMapping("/isLive")
     public BaseResult isLive(HttpServletRequest request) {
         TokenResult tokenResult = MyToken.isToken(request);
@@ -82,7 +48,6 @@ public class LoginController {
     /**
      * 退出登录
      */
-    @ApiOperation(value = "退出登录", notes = "清除Token并且重定向到登录页面")
     @GetMapping("/loginOut")
     public BaseResult logOut(HttpServletRequest request, HttpServletResponse response){
         Cookie userToken = MyCookie.getCookie(request, "Token");

@@ -37,6 +37,10 @@
               <el-icon><Bottom/></el-icon>
               <span>服务端下载</span>
             </el-menu-item>
+            <el-menu-item index="2-5">
+              <el-icon><Coordinate/></el-icon>
+              <span>服务端控制台</span>
+            </el-menu-item>
           </el-sub-menu>
         </el-menu>
       </el-aside>
@@ -85,7 +89,7 @@
 <style :src="baseMainCss"/>
 
 <script setup>
-import { Bottom, Collection, Search, Close, Grid, Cloudy, Document } from "@element-plus/icons-vue";
+import { Bottom, Collection, Search, Close, Grid, Cloudy, Document, Coordinate } from "@element-plus/icons-vue";
 </script>
 
 <script>
@@ -121,7 +125,6 @@ export default {
   methods:{
     isLogin(){
       let userinfo = getCookie("Token");
-      alert(userinfo.length)
       if(userinfo.length === 0){
         window.location.href="#/login"
       }
@@ -142,7 +145,6 @@ export default {
         this.isHideMenu = !this.isHideMenu;
         clearTimeout(this.hideTimer);
         this.hideTimer = setTimeout(() => {
-          console.log("1")
           this.isHideLogo = false;
         }, 300);
       }else {
