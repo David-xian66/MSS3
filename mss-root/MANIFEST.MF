@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Created-By: Maven JAR Plugin 3.2.2
-Build-Jdk-Spec: 13
-Implementation-Title: mss-root
-Implementation-Version: 0.0.1-SNAPSHOT
-Main-Class: top.mss3.mssroot.MssRootApplication
-

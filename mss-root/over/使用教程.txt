@@ -1,4 +1,0 @@
-1.打开MSS版本下载地址，查看你下载版本的更新日志是否存在“更新lib”，存在的话下载最新的lib直接替换旧lib（也就是说lib不用天天换，不更新lib就不用换
-2.如果你是新版本替换旧版本（第一次使用），win用户或mac用户需要以记事本打开run.bat或run,command并修改其中的MSS3-x.x.x.jar为你目前的文件名(.jar不要删去
-3.win用户双击run.bat mac用户双击run.command
-4.访问http://localhost:8080即可
