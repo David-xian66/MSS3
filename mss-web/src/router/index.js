@@ -1,7 +1,9 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from "../views/Home";
-import ServerManager from "@/views/ServerManager";
+import ServerManager from "../views/ServerManager";
+import ServerInput from "../views/ServerInput";
+import ServerSetting from "../views/ServerSetting";
 
 const routes = [
     {
@@ -23,6 +25,20 @@ const routes = [
         component: ServerManager,
         meta : {
             title : "MSS3-服务端管理",
+        }
+    },
+    {
+        path : '/serverInput',
+        component: ServerInput,
+        meta : {
+            title : "MSS3-服务端导入",
+        }
+    },
+    {
+        path : '/serverSetting',
+        component: ServerSetting,
+        meta : {
+            title : "MSS3-服务端设置",
         }
     }
 ]

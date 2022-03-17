@@ -79,6 +79,7 @@
               <slot></slot>
             </transition>
           </div>
+          <el-backtop />
         </el-main>
       </el-container>
     </el-container>
@@ -173,6 +174,12 @@ export default {
           break;
         case "2-1":
           window.location.href="#/serverManager"
+          break;
+        case "2-2":
+          window.location.href="#/serverSetting"
+          break;
+        case "2-3":
+          window.location.href="#/serverInput"
           break;
       }
     }

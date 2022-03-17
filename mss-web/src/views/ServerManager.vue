@@ -19,7 +19,7 @@
           <el-button :icon="SwitchButton">开启</el-button>
         </el-col>
         <el-col :span="1" style="margin-left: 40px">
-          <el-button :icon="CirclePlus">关闭</el-button>
+          <el-button :icon="CircleClose">关闭</el-button>
         </el-col>
         <el-col :span="1" style="margin-left: 40px">
           <el-button :icon="Close">终止</el-button>
@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import {RefreshRight, SwitchButton, CirclePlus, Close, Delete, Search} from "@element-plus/icons-vue";
+import {RefreshRight, SwitchButton, CircleClose, Close, Delete, Search} from "@element-plus/icons-vue";
 </script>
 
 <script>
